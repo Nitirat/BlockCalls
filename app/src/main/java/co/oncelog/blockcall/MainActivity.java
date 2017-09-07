@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 blackListDAO.create(phone);
                 PhoneListManager.getInstance().setDao(BlackListDAO.getAllBlacklist());
                 phoneCallAdapter.notifyDataSetChanged();
+                inputNumber.setText("");
             }
         }
     }
