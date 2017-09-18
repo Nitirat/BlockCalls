@@ -1,5 +1,10 @@
 package co.oncelog.blockcall.manager;
 
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import co.oncelog.blockcall.dao.BlackList;
@@ -7,7 +12,7 @@ import co.oncelog.blockcall.dao.BlackList;
 /**
  * Created by son_g on 9/3/2017.
  */
-public class PhoneListManager {
+public class PhoneListManager{
 
     private static PhoneListManager instance;
     private List<BlackList> dao;
@@ -29,4 +34,5 @@ public class PhoneListManager {
     public void setDao(List<BlackList> dao) {
         this.dao = dao;
     }
+
 }

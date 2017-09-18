@@ -1,15 +1,23 @@
 package co.oncelog.blockcall;
 
+import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.BasePermissionListener;
+import com.karumi.dexter.listener.single.CompositePermissionListener;
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 
 import co.oncelog.blockcall.adapter.PhoneCallAdapter;
 import co.oncelog.blockcall.dao.BlackList;
@@ -28,6 +36,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PermissionListener dialogPermissionListener =
+                DialogOnDeniedPermissionListener.Builder
+                        .withContext(this)
+                        .withTitle("Phone permission")
+                        .withMessage("Phone permission is needed")
+                        .withButtonText(android.R.string.ok)
+                        .build();
+
+        PermissionListener compositePermissionListener = new CompositePermissionListener(dialogPermissionListener);
+
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.CALL_PHONE)
+                .withListener(compositePermissionListener)
+                .check();
 
         initInstance();
     }

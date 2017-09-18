@@ -15,6 +15,7 @@
 
         <EditText
             android:id="@+id/inputNumber"
+            android:text="0"
             android:inputType="numberDecimal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -28,6 +29,13 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
+    <TextView
+        android:text="Blacklist"
+        android:gravity="center"
+        android:textColor="#ff0004"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.ListViewCompat
         android:id="@+id/listView"
